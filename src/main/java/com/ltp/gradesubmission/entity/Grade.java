@@ -1,5 +1,6 @@
 package com.ltp.gradesubmission.entity;
 
+import com.ltp.gradesubmission.validation.Score;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = " grade", uniqueConstraints = {
+@Table(name = "grade", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"student_id","course_id"})
 })
 public class Grade {
@@ -21,6 +22,8 @@ public class Grade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
+    @Score
     @Column(name = "score", nullable = false)
     private String score;
 
