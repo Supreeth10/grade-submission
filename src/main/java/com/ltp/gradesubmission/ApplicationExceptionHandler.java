@@ -1,9 +1,6 @@
 package com.ltp.gradesubmission;
 
-import com.ltp.gradesubmission.exception.CourseNotFoundException;
-import com.ltp.gradesubmission.exception.ErrorResponse;
-import com.ltp.gradesubmission.exception.GradeNotFoundException;
-import com.ltp.gradesubmission.exception.StudentNotFoundException;
+import com.ltp.gradesubmission.exception.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
@@ -30,7 +27,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         return new ResponseEntity<>(new ErrorResponse(errors), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({CourseNotFoundException.class, GradeNotFoundException.class, StudentNotFoundException.class})
+    @ExceptionHandler({CourseNotFoundException.class, GradeNotFoundException.class, StudentNotFoundException.class, StudentNotEnrolledException.class})
     public ResponseEntity<Object> handleResourceNotFoundException(RuntimeException ex){
         ErrorResponse error = new ErrorResponse(Arrays.asList(ex.getMessage()));
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
